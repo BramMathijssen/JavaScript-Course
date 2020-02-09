@@ -273,4 +273,165 @@ if (johnAvg > mikeAvg && johnAvg > maryAvg) {
     console.log("A strange situation happened! 😒");
 }
 
-''
+/*******************************
+* Functions - Video 20
+*/
+
+function calculateAge(birthYear) {
+    var currentYear = 2020
+    var age = currentYear - birthYear
+
+    return age;
+}
+
+var ageBram = calculateAge(1992)
+
+console.log(calculateAge(1990));
+console.log(ageBram);
+
+function yearUntilRetirement(year, firstName) {
+    var age = calculateAge(year);
+    var retirement = 65 - age;
+
+    if (retirement < 0) {
+        console.log(firstName + " Has allready retired");
+    } else {
+        console.log(firstName + " Retires in " + retirement + " years");
+    }
+}
+
+yearUntilRetirement(1990, "Bram");
+yearUntilRetirement(1930, "Jurgen");
+
+
+/*******************************
+* Function Statements and Expressions  - Video 21
+*/
+
+//Function declaration
+function whatDoYouDo(job, firstName) {
+    //Does the same as a Function Expression
+}
+
+
+// Function expression
+var whatDoYouDo = function (job, firstName) {
+    switch (job) {
+        case "teacher":
+            return firstName + "teaches kid how to code";
+        case "driver":
+            return firstName + "drivers people to their location";
+        case "designer":
+            return firstName + "designs beautiful websites.";
+        default:
+            return firstName + " does something else";
+    }
+}
+
+console.log(whatDoYouDo("teacher", "John"));
+
+
+/*******************************
+* Arrays  - Video 22
+*/
+
+var names = ["John", "Mark", "Jane"];
+var years = new Array(1990, 1969, 1948);
+
+console.log(names);
+console.log(names[2]);
+console.log(names.length);
+
+names[1] = "Ben";
+console.log(names);
+
+// Different data types
+var john = ["john", "Smith", 1990, "teacher", false];
+
+john.push("blue");
+john.unshift("Mr.");
+console.log(john);
+
+//removes element from the end
+john.pop();
+john.pop();
+console.log(john);
+
+//removes element from the start
+john.shift();
+console.log(john);
+
+//returns the position of 1990
+john.indexOf(1990);
+console.log(john.indexOf(1990));
+
+console.log(john.indexOf(-1)); //returns -1 which mean its not present in the array
+
+var isDesigner = john.lastIndexOf('Designer') === -1 ? "John is NOT a designer" : "John is a designer";
+console.log(isDesigner);
+
+/*******************************
+* Coding Challenge III  - Video 23
+*/
+
+var bills = [124, 48, 268];
+
+function tipCalc(billAmount) {
+    var tip;
+    if (billAmount < 50) {
+        tip = (billAmount / 100) * 20;
+        return tip;
+    } else if (billAmount >= 50 && billAmount < 200) {
+        tip = (billAmount / 100) * 15;
+        return tip;
+    } else if (billAmount >= 200) {
+        tip = (billAmount / 100) * 10;
+        return tip;
+    } else {
+        console.log("please enter a valid number");
+    }
+}
+
+var bills = [124, 48, 268];
+
+var tipList = [tipCalc(bills[0]), tipCalc(bills[1]), tipCalc(bills[2])];
+console.log(tipList);
+
+var finalList = [tipCalc(124) + 124, tipCalc(48) + 48, tipCalc(268) + 268];
+console.log(finalList);
+
+// Better Solution
+var finalList2 = [bills[0] + tipList[0], bills[1] + tipList[1], bills[2] + tipList[2]]
+console.log(finalList2);
+
+
+/*******************************
+* Objects and properties  - Video 25
+*/
+
+var john = {
+    firstName: 'John',
+    lastName: "Smith",
+    birthYear: 1990,
+    family: ["Jane", "Mark", "Emma"],
+    job: "teacher",
+    isMarried: false
+};
+
+console.log(john.firstName);
+console.log(john["lastName"]);
+var x = "birthYear";
+console.log(john[x]);
+
+john.job = "designer";
+
+var jane = new Object();
+jane.name = "Jane";
+jane.birthYear = 1969;
+jane["lastName"] = "Smith";
+console.log(jane);
+
+
+/*******************************
+* Objects and methods  - Video 26
+*/
