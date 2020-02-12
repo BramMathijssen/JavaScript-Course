@@ -435,3 +435,257 @@ console.log(jane);
 /*******************************
 * Objects and methods  - Video 26
 */
+
+// normal object
+var john = {
+    firstName: 'John',
+    lastName: "Smith",
+    birthYear: 1990,
+    family: ["Jane", "Mark", "Emma"],
+    job: "teacher",
+    isMarried: false,
+    calcAge: function (birthYear) {
+        return 2020 - birthYear;
+    }
+};
+
+console.log(john.calcAge(1990));
+
+// same object but usage of .this 
+var john = {
+    firstName: 'John',
+    lastName: "Smith",
+    birthYear: 1990,
+    family: ["Jane", "Mark", "Emma"],
+    job: "teacher",
+    isMarried: false,
+    calcAge: function () {
+        return 2020 - this.birthYear;
+    }
+};
+
+// no need to enter a birthYear cause the function uses this.birthYear directly from the object
+console.log(john.calcAge());
+
+// set a new property
+john.age = john.calcAge();
+
+// calcAge directly assigns the age to a property name instad of returning it
+var john = {
+    firstName: 'John',
+    lastName: "Smith",
+    birthYear: 1990,
+    family: ["Jane", "Mark", "Emma"],
+    job: "teacher",
+    isMarried: false,
+    calcAge: function () {
+        this.age = 2020 - this.birthYear;
+    }
+};
+john.calcAge();
+console.log(john);
+
+
+/*******************************
+* Coding Challenge IV  - Video 27
+*/
+
+var John = {
+    fullName: "Johnny Boy",
+    mass: 89,
+    height: 1.95,
+    calcBMI: function () {
+        this.BMI = this.mass / (this.height * this.height);
+    }
+};
+
+var Mark = {
+    fullName: "Mark the Man",
+    mass: 69,
+    height: 1.69,
+    calcBMI: function () {
+        this.BMI = this.mass / (this.height * this.height);
+    }
+};
+
+// can be improved by adding a return value and calculating the BMI directly into the if else calls
+var Bert = {
+    fullName: "Bert de Beuker",
+    mass: 69,
+    height: 1.69,
+    calcBMI: function () {
+        this.BMI = this.mass / (this.height * this.height);
+        return this.BMI
+    }
+};
+
+
+John.calcBMI();
+Mark.calcBMI();
+console.log(John);
+console.log(Mark);
+
+if (Mark.BMI > John.BMI) {
+    console.log(Mark.fullName + " has a higher BMI than John, his BMI is: " + Mark.BMI);
+} else if (John.BMI > Mark.BMI) {
+    console.log(John.fullName + " has a higher BMI than John, his BMI is: " + John.BMI);
+} else if (John.BMI === Mark.BMI) {
+    console.log("Both their BMI's are the same with: " + john.BMI);
+} else {
+    console.log("Something strange has happened");
+}
+//else if(Bert.calcBmi() > John.BMI){ clg ("blabla")}
+
+
+/*******************************
+* Loops and Iteration  - Video 29
+*/
+
+for (var i = 0; i < 10; i++) {
+    console.log(i);
+}
+
+var john = ["john", "Smith", 1990, "teacher", false];
+
+//for loop
+for (var i = 0; i < john.length; i++) {
+    console.log(john[i]);
+}
+
+//while loop
+var i = 0;
+while (i < john.length) {
+    console.log(john[i]);
+    i++;
+}
+
+
+// continue and break statements
+var john = ["john", "Smith", 1990, "teacher", false];
+
+for (var i = 0; i < john.length; i++) {
+    if (typeof john[i] !== "string") {
+        continue;
+    }
+    console.log(john[i]);
+}
+
+// breaks as soon as something is nog a string, break written on same line without curly brackets
+for (var i = 0; i < john.length; i++) {
+    if (typeof john[i] !== "string") break;
+    console.log(john[i]);
+}
+
+//looping backwards
+
+for (i = john.length - 1; i >= 0; i--) {
+    console.log(john[i]);
+}
+
+/*******************************
+* Coding Challenge V  - Video 30
+*/
+
+// own solution
+var bills = {
+    prices: [124, 48, 268, 180, 42],
+    tips: [],
+    finalPrices: [],
+    calcTip: function () {
+        for (i = 0; i < this.prices.length; i++) {
+            if (this.prices[i] < 50) {
+                this.tips.push(this.prices[i] * 0.2)
+                this.finalPrices.push((this.prices[i] * 0.2) + this.prices[i])
+            } else if (this.prices[i] >= 50 && this.prices[i] < 200) {
+                var tip =this.tips.push(this.prices[i] * 0.15)
+                this.finalPrices.push((this.prices[i] * 0.15) + this.prices[i])
+            } else if (this.prices[i] > 200) {
+                this.tips.push(this.prices[i] * 0.1)
+                this.finalPrices.push((this.prices[i] * 0.1) + this.prices[i])
+            }
+        }
+    }
+}
+
+bills.calcTip();
+console.log(bills);
+
+//video solution
+
+var johnBills = {
+    fullName : "john smith", 
+    prices: [124, 48, 268, 180, 42],
+    calcTip: function() {
+        this.tips = [];
+        this.finalPrices = [];
+
+        for(var i = 0 ; i< this.prices.length ; i++){
+            var percentage;
+            var bill = this.prices[i];
+
+            if(bill < 50){
+                percentage = .2;
+            } else if (bill >= 50 && bill < 200){
+                percentage = .15;
+            } else if( bill > 200){
+                percentage = 0.1;
+            }
+
+            this.tips[i] = bill * percentage;
+            this.finalPrices[i] = bill + (bill * percentage);
+        }
+    }
+}
+
+var markBills = {
+    fullName : "Markie Boy", 
+    prices: [77, 475, 110, 45],
+    calcTip: function() {
+        this.tips = [];
+        this.finalPrices = [];
+
+        for(var i = 0 ; i< this.prices.length ; i++){
+            var percentage;
+            var bill = this.prices[i];
+
+            if(bill < 50){
+                percentage = .2;
+            } else if (bill >= 50 && bill < 200){
+                percentage = .1;
+            } else if( bill > 200){
+                percentage = 0.25;
+            }
+
+            this.tips[i] = bill * percentage;
+            this.finalPrices[i] = bill + (bill * percentage);
+        }
+    }
+}
+
+// this function is outside of the objects because they both use exactly the same function,
+// this would result in duplicate code.
+function calcAverage(tips) {
+    var sum = 0;
+    for (var i = 0; i < tips.length; i++) {
+        sum = sum + tips[i];
+    }
+    var average  = sum / tips.length
+
+    return average
+}
+
+ 
+johnBills.calcTip();
+markBills.calcTip();
+
+johnBills.average = calcAverage(johnBills.tips);
+markBills.average = calcAverage(markBills.tips);
+
+console.log(johnBills, markBills);
+
+if(johnBills.average > markBills.average){
+    console.log(johnBills.fullName + " pays higher tips wiwth an average of " + johnBills.average);
+} else{
+    console.log(markBills.fullName + " pays higher tips wiwth an average of " + markBills.average);
+}
+
